@@ -45,22 +45,43 @@ public class ExampleUnitTest {
             Log.e("ExampleUnitTest", e.getException().getMessage());
         }
 
-        if (aClass == null) {
-            assertNotEquals(aClass, null);
-            return;
-        }
-        else {
-            try {
-                Class[] args = new Class[2];
-                args[0] = Integer.TYPE; // TYPE used instead of .class for primitives (I think)
-                args[1] = Integer.TYPE;
-                aMethod = aClass.getMethod("add", args);
+        assertNotEquals(aClass, null);
 
-            } catch (NoSuchMethodException e) {
-                Log.e("ExampleUnitTest", e.getMessage());
-            }
+        try {
+            Class[] args = new Class[2];
+            args[0] = Integer.TYPE; // TYPE used instead of .class for primitives (I think)
+            args[1] = Integer.TYPE;
+            aMethod = aClass.getMethod("add", args);
 
-            assertNotEquals(aMethod, null);
+        } catch (NoSuchMethodException e) {
+            Log.e("ExampleUnitTest", e.getMessage());
         }
+
+        assertNotEquals(aMethod, null);
+    }
+
+    @Test
+    public void testMainActivityConcatenateMethodExists() throws Exception {
+        Class<?> aClass = null;
+        Method aMethod = null;
+        try {
+            aClass = Class.forName("com.codeschool.emptytestproject.MainActivity");
+        } catch (ClassNotFoundException e) {
+            Log.e("ExampleUnitTest", e.getException().getMessage());
+        }
+
+        assertNotEquals(aClass, null);
+
+        try {
+            Class[] args = new Class[2];
+            args[0] = String.class;
+            args[1] = String.class;
+            aMethod = aClass.getMethod("concatenate", args);
+
+        } catch (NoSuchMethodException e) {
+            Log.e("ExampleUnitTest", e.getMessage());
+        }
+
+        assertNotEquals(aMethod, null);
     }
 }
